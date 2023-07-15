@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Locations{% endblock  %}
+
+{% block content %}
+
+<h1 class="title pt-5">Trending Locations</h1>
+<div class="gallery">
+  {% for location in locations %}
+  <a href="">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-square">
+          <img src="{{location.img}}" alt="{{location.name}}" />
+        </figure>
+      </div>
+      <div class="card-header">
+        <p class="card-header-title">{{location.name}}</p>
+      </div>
+    </div>
+  </a>
+	{% empty %}
+  <article class="message">
+    <div class="message-header">
+      <p>No Location Available</p>
+    </div>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}
