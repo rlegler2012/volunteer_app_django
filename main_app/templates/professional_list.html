@@ -15,6 +15,7 @@
   </div>
   <!--  This anchor tag will redirect back to professional list without a query param -->
   <a class="button is-dark" href="{% url 'professional_list' %}">Clear Search</a>
+  <a class="button is-dark" href="{% url 'professional_create' %}">Add a Profession</a>
 </form>
 <div class="gallery">
   {% for professional in professionals %}

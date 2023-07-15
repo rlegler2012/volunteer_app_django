@@ -3,6 +3,7 @@ from django.views import View
 from django.http import HttpResponse 
 from django.views.generic.base import TemplateView
 from .models import Professional
+from django.views.generic.edit import CreateView
 
 
 class Home(TemplateView):
@@ -11,7 +12,8 @@ class Home(TemplateView):
 class About(TemplateView):
     template_name = "about.html"
 
-#####Professional List
+
+### Professional List ####################
 class ProfessionalList(TemplateView):
     template_name = "professional_list.html"
 
@@ -27,7 +29,12 @@ class ProfessionalList(TemplateView):
             # default header for not searching 
             context["header"] = "Professionals"
         return context
-    
+
+class ProfessionalCreate(CreateView):
+    model = Professional
+    fields = ['name', 'img', 'bio']
+    template_name = "professional_create.html"
+    success_url = "/professionals/"
 
 #####Location List
 class Location:
