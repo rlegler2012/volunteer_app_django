@@ -8,6 +8,19 @@
 </div>
 <div class="detail__container">
     <div class="buttons">
+        <a href="{% url 'professional_update' professional.pk %}" class="button is-info">
+            <span class="icon">
+                <i class="fas fa-edit"></i>
+            </span>
+        </a>
+        <a href="{% url 'professional_delete' professional.pk %}" class="button is-danger">
+            <span class="icon">
+                <i class="fas fa-trash-alt"></i>
+            </span>
+        </a>
+    </div>
+{% comment %} <div class="detail__container">
+    <div class="buttons">
         <div class="buttons">
     <a href="{% url 'professional_update' professional.pk %}" class="button is-info"> Updates
         <span class="icon">
@@ -18,7 +31,7 @@
         <span class="icon">
             <i class="fas fa-trash-alt"></i>
         </span>
-    </a>
+    </a> {% endcomment %}
 </div>
     <div class="detail__about">
         <h4 class="title is-4">About</h4>
