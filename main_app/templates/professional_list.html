@@ -17,9 +17,10 @@
   <a class="button is-dark" href="{% url 'professional_list' %}">Clear Search</a>
   <a class="button is-dark" href="{% url 'professional_create' %}">Add a Profession</a>
 </form>
+{% comment %} The way the {% url %} tag works as so: {% url 'name of url' 'value of param' %} {% endcomment %}
 <div class="gallery">
   {% for professional in professionals %}
-  <a href="">
+  <a href="{% url 'professional_detail' professional.pk %}">
     <div class="card">
       <div class="card-image">
         <figure class="image is-square">

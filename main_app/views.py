@@ -4,7 +4,8 @@ from django.http import HttpResponse
 from django.views.generic.base import TemplateView
 from .models import Professional
 from django.views.generic.edit import CreateView
-
+from django.views.generic import DetailView
+from django.views.generic.edit import CreateView, UpdateView
 
 class Home(TemplateView):
     template_name = "home.html"  
@@ -36,6 +37,16 @@ class ProfessionalCreate(CreateView):
     template_name = "professional_create.html"
     success_url = "/professionals/"
 
+class ProfessionalDetail(DetailView):
+    model = Professional
+    template_name = "professional_detail.html"
+
+class ProfessionalUpdate(UpdateView):
+    model = Professional
+    fields = ['name', 'img', 'bio']
+    template_name = "professional_update.html"
+    success_url = "/professionals/"
+    
 #####Location List
 class Location:
     def __init__(self, name, img, bio):
