@@ -3,9 +3,9 @@ from django.views import View
 from django.http import HttpResponse 
 from django.views.generic.base import TemplateView
 from .models import Professional
-from django.views.generic.edit import CreateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView
+from django.urls import reverse
 
 class Home(TemplateView):
     template_name = "home.html"  
@@ -31,23 +31,31 @@ class ProfessionalList(TemplateView):
             context["header"] = "Professionals"
         return context
 
+class ProfessionalDetail(DetailView):
+    model = Professional
+    template_name = "professional_detail.html"
+    
 class ProfessionalCreate(CreateView):
     model = Professional
     fields = ['name', 'img', 'bio']
     template_name = "professional_create.html"
-    success_url = "/professionals/"
-
-class ProfessionalDetail(DetailView):
-    model = Professional
-    template_name = "professional_detail.html"
-
+    # this will get the pk from the route and redirect to professional view
+    def get_success_url(self):
+        return reverse('artist_detail', kwargs={'pk': self.object.pk})
+        
+        
 class ProfessionalUpdate(UpdateView):
     model = Professional
     fields = ['name', 'img', 'bio']
     template_name = "professional_update.html"
-    success_url = "/professionals/"
+
+    def get_success_url(self):
+        return reverse('professional_detail', kwargs={'pk': self.object.pk})
     
-#####Location List
+    
+    
+    
+##### Location List #####################
 class Location:
     def __init__(self, name, img, bio):
         self.name = name
