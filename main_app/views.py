@@ -1,11 +1,13 @@
+from typing import Any, Dict
+from django.shortcuts import redirect
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse 
+from .models import Professional, Location
 from django.views.generic.base import TemplateView
-from .models import Professional
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
+
 
 class Home(TemplateView):
     template_name = "home.html"  
@@ -59,18 +61,6 @@ class ProfessionalDelete(DeleteView):
     
     
 ##### Location List #####################
-class Location:
-    def __init__(self, name, img, bio):
-        self.name = name
-        self.img = img
-        self.bio = bio
-
-
-locations = [
-  Location("adsfasdf", "dafds",
-          "sefwert"),
-    ]
-
 class LocationList(TemplateView):
     template_name = "location_list.html"
 
@@ -78,3 +68,24 @@ class LocationList(TemplateView):
         context = super().get_context_data(**kwargs)
         context["locations"] = locations
         return context
+    
+# class Location:
+#     def __init__(self, name, img, bio):
+#         self.name = name
+#         self.img = img
+#         self.bio = bio
+
+
+locations = [
+  Location("adsfasdf", "dafds",
+          "sefwert"),
+    ]
+
+class LocationCreate(View):
+
+    def post(self, request, pk):
+        venue = request.POST.get("venue")
+        bio = request.POST.get("bio")
+        professional = Professional.objects.get(pk=pk)
+        Location.objects.create(venue=venue, bio=bio, professional=professional)
+        return redirect('professional_detail', pk=pk)

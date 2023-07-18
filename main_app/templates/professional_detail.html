@@ -19,19 +19,49 @@
             </span>
         </a>
     </div>
-{% comment %} <div class="detail__container">
-    <div class="buttons">
-        <div class="buttons">
-    <a href="{% url 'professional_update' professional.pk %}" class="button is-info"> Updates
-        <span class="icon">
-            <i class="fas fa-edit"></i>
-        </span>
-    </a>
-    <a href="" class="button is-danger">
-        <span class="icon">
-            <i class="fas fa-trash-alt"></i>
-        </span>
-    </a> {% endcomment %}
+    <div class="detail__locations mb-5">
+        <h3 class="title is-3">Locations</h3>
+        <form class="mb-5" action="{% url 'location_create' professional.pk %}" method="post">
+            {% csrf_token %}
+            <div class="field has-addons">
+                <div class="control">
+                    <input
+                        class="input"
+                        type="text"
+                        name="venue"
+                        placeholder="Venue"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input
+                        class="input"
+                        type="text"
+                        name="bio"
+                        placeholder="Location Description"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Add Locaiton" />
+                </div>
+            </div>
+        </form>
+        {% for location in professional.locations.all %}
+        <div class="location">
+        <span>{{forloop.counter}}</span>
+        <span><b>{{location.venue}}</b></span>
+        <span>{{location.bio}}</span>
+        </div>
+            {% empty %}
+        <article class="message">
+        <div class="message-header">
+            <p>No Locations Available</p>
+        </div>
+        </article>
+
+    {% endfor %}
+  </div>
 </div>
     <div class="detail__about">
         <h4 class="title is-4">About</h4>
