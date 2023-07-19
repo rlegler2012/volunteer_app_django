@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Professional{% endblock  %}
+{% block title %}Professional{% endblock %}
 
 {% block content %}
-{% for location in locationss %}
+{% for location in locations %}
 <h1>{{location.venue}}</h1>
 {% empty %}
-<p>No songs Available</p>
+<p>No Location Available</p>
 {% endfor %}
 {% endblock %}

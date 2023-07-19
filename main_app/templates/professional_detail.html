@@ -49,15 +49,15 @@
         </form>
         {% for location in professional.locations.all %}
         <div class="location">
-        <span>{{forloop.counter}}</span>
-        <span><b>{{location.venue}}</b></span>
-        <span>{{location.bio}}</span>
+            <span>{{forloop.counter}}</span>
+            <span><b>{{location.venue}}</b></span>
+            <span>{{location.bio}}</span>
         </div>
             {% empty %}
         <article class="message">
-        <div class="message-header">
-            <p>No Locations Available</p>
-        </div>
+            <div class="message-header">
+                <p>No Locations Available</p>
+            </div>
         </article>
 
     {% endfor %}
