@@ -10,6 +10,12 @@ from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 
+# Auth
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+
+
 class Signup(View):
     # show a form to fill out
     def get(self, request):
@@ -35,22 +41,9 @@ class About(TemplateView):
     template_name = "about.html"
 
 
-### Professional List ##########
-# class ProfessionalList(TemplateView):
-#     template_name = "professional_list.html"
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         name = self.request.GET.get("name")
-#         if name != None:
-#             context["professionals"] = Professional.objects.filter(name__icontains=name)
-#             # We add a header context that includes the search param
-#             context["header"] = f"Searching for {name}"
-#         else:
-#             context["professionals"] = Professional.objects.all()
-#             # default header for not searching 
-#             context["header"] = "Professionals"
-#         return context
+### Professional List ##########
+@method_decorator(login_required, name='dispatch')
 class ProfessionalList(TemplateView):
     template_name = "professional_list.html"
 
@@ -63,7 +56,7 @@ class ProfessionalList(TemplateView):
             context["header"] = f"Searching for {name}"
         else:
             context["professionals"] = Professional.objects.filter(user=self.request.user)
-            context["header"] = "Trending Professional"
+            # context["header"] = "Trending Professional"
         return context
 
 
@@ -84,16 +77,7 @@ class ProfessionalCreate(CreateView):
     def get_success_url(self):
         print(self.kwargs)
         return reverse('professional_detail', kwargs={'pk': self.object.pk}) 
-   
-# class ProfessionalCreate(CreateView):
-#     model = Professional
-#     fields = ['name', 'img', 'bio']
-#     template_name = "professional_create.html"
-#     # this will get the pk from the route and redirect to professional view
-#     def get_success_url(self):
-#         return reverse('professional_detail', kwargs={'pk': self.object.pk})
-        
-        
+    
 class ProfessionalUpdate(UpdateView):
     model = Professional
     fields = ['name', 'img', 'bio']
@@ -109,6 +93,12 @@ class ProfessionalDelete(DeleteView):
     
     
 ##### Location List #########
+locations = [
+  Location("testing", "test",
+          "testtesttest"),
+    ]
+
+# @method_decorator(login_required, name='dispatch')
 class LocationList(TemplateView):
     template_name = "location_list.html"
 
@@ -117,16 +107,13 @@ class LocationList(TemplateView):
         context["locations"] = locations
         return context
 
-locations = [
-  Location("testing", "test",
-          "testtesttest"),
-    ]
-
 class LocationCreate(View):
 
     def post(self, request, pk):
-        venue = request.POST.get("venue")
-        bio = request.POST.get("bio")
+        event_name = request.POST.get("event_name")
+        city = request.POST.get("city")
+        state = request.POST.get("state")
+        link = request.POST.get("link")
         professional = Professional.objects.get(pk=pk)
-        Location.objects.create(venue=venue, bio=bio, professional=professional)
+        Location.objects.create(event_name=event_name, city=city, state=state, link=link, professional=professional)
         return redirect('professional_detail', pk=pk)
