@@ -4,14 +4,6 @@
     <img src="{{professional.img}}" alt="{{professional.name}}" />
 </div>
 <div class="detail__name">
-    {% comment %} {% if professional.verified_artist %}
-    <div class="icon-text">
-        <span class="icon has-text-info">
-            <i class="fas fa-check-circle"></i>
-        </span>
-        <span>Verified</span>
-    </div>
-    {% endif %} {% endcomment %}
     <h1 class="title">{{professional.name}}</h1>
 </div>
 <div class="detail__container">
@@ -68,25 +60,6 @@
             <span>{{location.city}}</span>
             <span>{{location.state}}</span>
             <span>{{location.link}}</span>
-            {% comment %} <span>
-                <div class="dropdown">
-                    <div class="dropdown-trigger">
-                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                            <span>Add to Playlist</span>
-                            <span class="icon is-small">
-                                <i class="fas fa-angle-down" aria-hidden="true"></i>
-                            </span>
-                        </button>
-                    </div> {% endcomment %}
-                    {% comment %} <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                        <div class="dropdown-content">
-                            {% for playlist in playlists %}
-                            <a href="{% url 'playlist_song_assoc' playlist.pk song.pk %}?assoc=add" class="dropdown-item">{{ playlist.title }}</a>
-                            {% endfor %}
-                        </div> {% endcomment %}
-                    {% comment %} </div>
-                </div>
-            </span> {% endcomment %}
         </div>
         {% empty %}
         <article class="message">
@@ -114,81 +87,3 @@
     </div>
 </div>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-{% comment %} {% extends 'base.html' %} 
-{% block content %}
-<div class="detail__img">
-    <img src="{{professional.img}}" alt="{{professional.name}}" />
-</div>
-<div class="detail__name">
-    <h1 class="title">{{professional.name}}</h1>
-</div>
-<div class="detail__container">
-    <div class="detail__locations mb-5">
-        <h3 class="title is-3">Locations</h3>
-        <form class="mb-5" action="{% url 'location_create' professional.pk %}" method="post">
-            {% csrf_token %}
-            <div class="field has-addons">
-                <div class="control">
-                    <input
-                        class="input"
-                        type="text"
-                        name="venue"
-                        placeholder="Venue"
-                        required
-                    />
-                </div>
-                <div class="control">
-                    <input
-                        class="input"
-                        type="text"
-                        name="bio"
-                        placeholder="Location Description"
-                        required
-                    />
-                </div>
-                <div class="control">
-                    <input class="button is-primary" type="submit" value="Add Location" />
-                </div>
-            </div>
-        </form>
-        {% for location in professional.locations.all %}
-        <div class="location">
-            <span>{{forloop.counter}}</span>
-            <span><b>{{location.venue}}</b></span>
-            <span>{{location.bio}}</span>
-        </div>
-            {% empty %}
-        <article class="message">
-            <div class="message-header">
-                <p>No Locations Available</p>
-            </div>
-        </article>
-        {% endfor %}
-    </div>
-    <div class="buttons">
-        <a href="{% url 'professional_update' professional.pk %}" class="button is-info">
-            <span class="icon">
-                <i class="fas fa-edit"></i>
-            </span>
-        </a>
-        <span class="icon">
-            <a href="{% url 'professional_delete' professional.pk %}" class="button is-danger">
-                <i class="fas fa-trash-alt"></i>
-        </span>
-        </a>
-    </div>
-    <div class="detail__about">
-        <h4 class="title is-4">About</h4>
-        <p>{{professional.bio}}</p>
-    </div>
-</div>
-{% endblock %} {% endcomment %}
