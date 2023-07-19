@@ -1,27 +1,49 @@
 body {
-  background-color: #63dcaa;
-  color: #c06565;
+  background-color: #0b2d16eb;
+  color: #ddbc58;
   min-height: 100vh;
 }
 
-h1,
-h2,
-h3 {
-  color: #a60808;
+.image h2{
+  font-size: 60px;
+  color: #ddbc58;
 }
 
+
+h2, 
+h3, 
+h4{
+  color: #ddbc58;
+  font-family: 'Amatic SC', cursive;
+  font-size: 40px;
+}
+
+.container h5{
+  font-size: 30px;
+  color: #ddbc58;
+  font-family: 'Amatic SC', cursive;
+}
+.container h6{
+  font-size: 70px;
+  color: #ddbc58;
+  font-family: 'Amatic SC', cursive;
+}
+
+h1 {
+  font-size: 100px;
+  font-family: 'Amatic SC', cursive;
+}
 .container {
-  padding: 30px;
+  padding: 40px;
   padding-right: 0;
 }
 
 .title {
-  color: #a96d95;
+  color: #ddbc58;
 }
 
 .gallery {
-  /* display: grid; */
-  display: flex;
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   justify-content: center;
   gap: 30px;
@@ -37,20 +59,18 @@ h3 {
 }
 
 p {
-  font-size: 13px;
-
+  font-size: 12px;
 }
 
-/* .detail__img {
+.detail__img {
   position: absolute;
-  display: flex;
   left: 0;
   top: 0;
-  /* width: 100%;
-  height: 300px; */
-  /* background-color: #ffffff; */
-  /* overflow: hidden;
-} */
+  width: 100%;
+  height: 500px;
+  color: #ddbc58;
+  overflow: hidden;
+}
 
 .detail__img::after {
   content: "";
@@ -71,38 +91,41 @@ img {
 }
 
 .detail__name {
-  /* position: absolute; */
+  position: absolute;
   z-index: 5;
-  top: 130px;
+  top: 400px;
 }
 
 .detail__container {
-  margin-top: 75px;
+  margin-top: 500px;
 }
 
-.detail__locations {
-  width: 100%;
-  /* display: flex; */
-  flex-direction: column;
-  
+
+.category-info {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.location {
-  width: 100%;
-  padding: 4px;
-  text-indent: 5ch;
-  
-  /* display: grid; */
-  /* grid-template-columns: 11fr 3fr 0.5fr 0.3fr; */
-  /* border-radius: 5px; */
+.image{
+  position:relative;
 }
 
-.location:hover {
-  background-color: hsla(150, 71%, 39%, 0.454);
-  cursor: pointer;
+.image img{
+  width:770px;
+  height:200px;
 }
 
-.dropdown{
-  background-color: hsla(150, 71%, 39%, 0.454);
-  text-decoration-color: #1f1f1f;
+.image h1{
+  position:absolute;
+  width:100%;
+  color:rgb(11, 11, 11);
+  line-height:350px;
+  margin:0;
+  font-size: 30px;
+}
+
+.card, .card-header-title{
+  font-size: 30px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Delicious Handrawn', cursive;
 }
