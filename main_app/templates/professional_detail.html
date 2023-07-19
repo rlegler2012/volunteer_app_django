@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="detail__img">
-    <img src="{{professional.img}}" alt="{{professional.name}}" />
+    <div class="detail__name">
+        <h1 class="title">{{ professional.name }}</h1>
+        <p>{{professional.bio}}</p>
+    </div>
+    <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Update {{ professional.name }}
+        </a>
+      
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'professional_update' professional.pk %}">Edit</a>
+          <a class="dropdown-item" href="{% url 'professional_delete' professional.pk %}">Delete</a>
+        </div>
+    </div>
+    <div class="detail__about">
 </div>
-<div class="detail__name">
-    <h1 class="title">{{professional.name}}</h1>
 </div>
 <div class="detail__container">
     <div class="detail__locations mb-5">
@@ -13,7 +24,7 @@
             {% csrf_token %}
             <div class="field has-addons">
                 <div class="control">
-                    <inpu
+                    <input
                         class="input"
                         type="text"
                         name="event_name"
@@ -40,15 +51,6 @@
                     />
                 </div>
                 <div class="control">
-                    <input
-                        class="input"
-                        type="text"
-                        name="link"
-                        placeholder="Event Link"
-                        required
-                    />
-                </div>
-                <div class="control">
                     <input class="button is-primary" type="submit" value="Add Volunteer Event" />
                 </div>
             </div>
@@ -59,7 +61,6 @@
             <span><b>{{location.event_name}}</b></span>
             <span>{{location.city}}</span>
             <span>{{location.state}}</span>
-            <span>{{location.link}}</span>
         </div>
         {% empty %}
         <article class="message">
@@ -68,22 +69,6 @@
             </div>
         </article>
         {% endfor %}
-    </div>
-    <div class="buttons">
-        <a href="{% url 'professional_update' professional.pk %}" class="button is-info">
-            <span class="icon">
-                <i class="fas fa-edit"></i>
-            </span>
-        </a>
-        <span class="icon">
-            <a href="{% url 'professional_delete' professional.pk %}" class="button is-danger">
-                <i class="fas fa-trash-alt"></i>
-        </span>
-        </a>
-    </div>
-    <div class="detail__about">
-        <h4 class="title is-4">About</h4>
-        <p>{{professional.bio}}</p>
     </div>
 </div>
 {% endblock %}
