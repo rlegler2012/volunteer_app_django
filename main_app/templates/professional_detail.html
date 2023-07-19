@@ -19,7 +19,7 @@
 </div>
 <div class="detail__container">
     <div class="detail__locations mb-5">
-        <h3 class="title is-3">Volunteer Opportunities for {{professional.name}}:</h3>
+        <h3 class="title is-3">Submit Volunteer Opportunities for {{professional.name}}:</h3>
         <form class="mb-5" action="{% url 'location_create' professional.pk %}" method="post">
             {% csrf_token %}
             <div class="field has-addons">

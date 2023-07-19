@@ -22,7 +22,7 @@ class Location(models.Model):
     event_name = models.CharField(max_length=200, default=1)
     city = models.CharField(max_length=100, default=1)
     state = models.CharField(max_length=100, default=1)
-    link = models.URLField(max_length=300, default=1)
+    # link = models.URLField(max_length=300, default=1)
     professional = models.ForeignKey(Professional, on_delete=models.CASCADE, related_name="locations")
 
     def __str__(self):
